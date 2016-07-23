@@ -1,0 +1,17 @@
+build/*
+pyunch/__pycache__/*
+bin/__pycache__/*
+pyunch/*pyc
+bin/*pyc
+bin/#*#
+bin/*#*
+pyunch/#*$
+pyunch/*#*
+pyunch/*~
+bin/*~
+#*#
+*~
+env/*
+.DS_Store
+dist/
+*.egg-info/
