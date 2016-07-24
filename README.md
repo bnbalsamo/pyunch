@@ -5,11 +5,11 @@ pyunch is a minimal process launcher inspired by dmenu.
 Invoke it, start typing, hit enter when the entry you want to run is highlighted.
 
 
+```
 usage: pyunch [-h] [--no-environmental NO_ENVIRONMENTAL] [--recurse RECURSE]
               [-p PATH] [-x WIDTH] [-y HEIGHT] [--yposition YPOSITION]
               [--xposition XPOSITION] [--xoffset XOFFSET] [--yoffset YOFFSET]
 
-```
 optional arguments:
   -h, --help            show this help message and exit
   --no-environmental NO_ENVIRONMENTAL
