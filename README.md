@@ -9,6 +9,7 @@ usage: pyunch [-h] [--no-environmental NO_ENVIRONMENTAL] [--recurse RECURSE]
               [-p PATH] [-x WIDTH] [-y HEIGHT] [--yposition YPOSITION]
               [--xposition XPOSITION] [--xoffset XOFFSET] [--yoffset YOFFSET]
 
+```
 optional arguments:
   -h, --help            show this help message and exit
   --no-environmental NO_ENVIRONMENTAL
@@ -28,3 +29,4 @@ optional arguments:
                         The x position (left, right, or center) of the window
   --xoffset XOFFSET     The offset to apply to the x position
   --yoffset YOFFSET     The offset to apply to the y position
+```
