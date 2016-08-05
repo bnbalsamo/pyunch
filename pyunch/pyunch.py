@@ -12,6 +12,8 @@ from tkinter import *
 from tkinter import ttk
 from subprocess import Popen
 from argparse import ArgumentParser
+from os import system
+from platform import system as platform
 
 
 class App(object):
@@ -21,6 +23,11 @@ class App(object):
         self.launcher = launcher
         root = Tk(className="pyunch")
         root.title("pyunch")
+        # Force the window to the front on macs
+        if platform() == 'Darwin':
+            system('''/usr/bin/osascript -e 'tell app "Finder" to set frontmost of process "Python" to true' ''')
+        root.wm_attributes("-topmost", 1)
+        root.focus_force()
         self.in_text = StringVar()
         self.in_entry = ttk.Entry(root, textvariable=self.in_text)
         self.lbox = Listbox(root,
@@ -64,6 +71,7 @@ class App(object):
         y += yoffset
 
         root.geometry('%dx%d+%d+%d' % (width, height, x, y))
+
 
         root.mainloop()
 
@@ -167,12 +175,15 @@ class Launcher(object):
         stack = [x for x in self.paths]
         while stack:
             path = stack.pop()
-            for x in scandir(path):
-                if x.is_file(follow_symlinks=True) and access(x.path, X_OK):
-                    self.add_exec(x)
-                if recurse is True:
-                    if x.is_dir(follow_symlinks=True):
-                        stack.append(x.path)
+            try:
+                for x in scandir(path):
+                    if x.is_file(follow_symlinks=True) and access(x.path, X_OK):
+                        self.add_exec(x)
+                    if recurse is True:
+                        if x.is_dir(follow_symlinks=True):
+                            stack.append(x.path)
+            except:
+                pass
 
     def get_execs(self):
         return self._execs
@@ -241,7 +252,8 @@ def main():
 
     paths = []
     if not args.no_environmental:
-        paths = paths + environ['PATH'].split(":")
+        paths = paths + [x for x in environ['PATH'].split(":") if
+                         x != '']
     if args.path:
         paths = paths + args.path
     l = Launcher(paths=paths, recurse=args.recurse)
