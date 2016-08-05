@@ -26,8 +26,8 @@ class App(object):
         self.in_entry = ttk.Entry(root, textvariable=self.in_text)
         self.lbox = Listbox(root,
                             listvariable=StringVar(
-                                value=[x for x in self.launcher.execs if
-                                       (self.in_text.get() in x)]),
+                                value=[x.name for x in self.launcher.execs if
+                                       (self.in_text.get() in x.name)]),
                             height=height,
                             width=width,
                             selectmode="SINGLE")
@@ -71,10 +71,14 @@ class App(object):
 
     def run(self, *args):
         try:
-            cmd = self.lbox.get(int(self.lbox.curselection()[0]))
+            sel = self.lbox.get(int(self.lbox.curselection()[0]))
+            ex = [x for x in self.launcher.execs if sel in x.name][0]
+            i = self.launcher.execs.index(ex)
+            self.launcher.launch_index(i)
+
         except:
             cmd = self.in_text.get().split(" ")
-        self.launcher.launch_str(cmd)
+            self.launcher.launch_str(cmd)
         self.exit()
 
     def sel_up(self, *args):
@@ -111,10 +115,10 @@ class App(object):
 
     def box_update(self, *args):
         if self.in_text.get() == "":
-            o_list = [x for x in self.launcher.execs]
+            o_list = [x.name for x in self.launcher.execs]
         else:
-            listvar = [x for x in self.launcher.execs
-                       if self.in_text.get() in x]
+            listvar = [x.name for x in self.launcher.execs
+                       if self.in_text.get() in x.name]
             first = []
             second = []
             third = []
@@ -155,7 +159,7 @@ class Launcher(object):
 
         self.paths = paths
         self.find_execs(recurse=recurse)
-        self.execs.sort()
+        self.execs.sort(key=lambda x: x.name)
 
     def get_paths(self):
         return self._paths
@@ -177,7 +181,7 @@ class Launcher(object):
             path = stack.pop()
             for x in scandir(path):
                 if x.is_file(follow_symlinks=True) and access(x.path, X_OK):
-                    self.add_exec(x.name)
+                    self.add_exec(x)
                 if recurse is True:
                     if x.is_dir(follow_symlinks=True):
                         stack.append(x.path)
@@ -194,7 +198,7 @@ class Launcher(object):
         self._execs.append(x)
 
     def del_execs(self):
-        self._execsc = []
+        self._execs = []
 
     def launch_str(self, x):
         if isinstance(x, str):
@@ -203,8 +207,8 @@ class Launcher(object):
             args = x
         Popen(args)
 
-    def launch_index(self, x):
-        self.launch_str(self.execs[x])
+    def launch_index(self, i):
+        self.launch_str(self.execs[i].path)
 
     paths = property(get_paths, set_paths, del_paths)
     execs = property(get_execs, set_execs, del_execs)
