@@ -21,7 +21,6 @@ class App(object):
         self.launcher = launcher
         root = Tk(className="pyunch")
         root.title("pyunch")
-        mainframe = ttk.Frame(root, padding="3 3 12 12")
         self.in_text = StringVar()
         self.in_entry = ttk.Entry(root, textvariable=self.in_text)
         self.lbox = Listbox(root,
@@ -43,7 +42,6 @@ class App(object):
 
         self.in_entry.pack(fill=X, expand=True)
         self.lbox.pack(fill=BOTH, expand=True)
-        mainframe.pack()
 
         ws = root.winfo_screenwidth()
         hs = root.winfo_screenheight()
