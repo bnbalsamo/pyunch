@@ -139,16 +139,6 @@ class App(object):
     def exit(self, *args):
         exit()
 
-    def set_palette(self, fg=None, bg=None, sel_fg=None, sel_bg=None):
-        if bg is None:
-            bg = root['bg']
-        if self_bg is None:
-            sel_fg = root['highlightbackground']
-        if sel_fg is None:
-            sel_fg = root['highlightcolor']
-
-        root.tk_setPalette(background=bg)
-
 
 class Launcher(object):
 
