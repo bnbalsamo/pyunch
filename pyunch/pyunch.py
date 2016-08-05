@@ -159,7 +159,7 @@ class Launcher(object):
 
         self.paths = paths
         self.find_execs(recurse=recurse)
-        self.execs.sort(key=lambda x: x.name)
+        self.execs.sort(key=lambda x: x.name.lower())
 
     def get_paths(self):
         return self._paths
@@ -256,7 +256,7 @@ def main():
         paths = paths + environ['PATH'].split(":")
     if args.path:
         paths = paths + args.path
-    l = Launcher(paths=paths)
+    l = Launcher(paths=paths, recurse=args.recurse)
     App(l,
         width=args.width, height=args.height,
         xposition=args.xposition, yposition=args.yposition,
