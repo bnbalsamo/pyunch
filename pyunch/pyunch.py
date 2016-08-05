@@ -219,12 +219,12 @@ def main():
     parser.add_argument("--no-environmental",
                         help="Don't grab the $PATH environmental variable " +
                         "automatically",
-                        type=bool, default=False)
+                        action="store_true")
     parser.add_argument("--recurse",
                         help="Recursively scan provided paths. WARNING: " +
                         "THIS CAN MAKE THINGS RUN SLOWLY IN DEEP DIRECTORY " +
                         "STRUCTURES.",
-                        type=bool, default=False)
+                        action="store_true")
     parser.add_argument("-p", "--path", help="Manually specify paths to " +
                         "parse looking for executables.",
                         action="append")

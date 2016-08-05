@@ -6,16 +6,15 @@ Invoke it, start typing, hit enter when the entry you want to run is highlighted
 
 
 ```
-usage: pyunch [-h] [--no-environmental NO_ENVIRONMENTAL] [--recurse RECURSE]
-              [-p PATH] [-x WIDTH] [-y HEIGHT] [--yposition YPOSITION]
-              [--xposition XPOSITION] [--xoffset XOFFSET] [--yoffset YOFFSET]
+usage: pyunch.py [-h] [--no-environmental] [--recurse] [-p PATH] [-x WIDTH]
+                 [-y HEIGHT] [--yposition YPOSITION] [--xposition XPOSITION]
+                 [--xoffset XOFFSET] [--yoffset YOFFSET]
 
 optional arguments:
   -h, --help            show this help message and exit
-  --no-environmental NO_ENVIRONMENTAL
-                        Don't grab the $PATH environmental variable
+  --no-environmental    Don't grab the $PATH environmental variable
                         automatically
-  --recurse RECURSE     Recursively scan provided paths. WARNING: THIS CAN
+  --recurse             Recursively scan provided paths. WARNING: THIS CAN
                         MAKE THINGS RUN SLOWLY IN DEEP DIRECTORY STRUCTURES.
   -p PATH, --path PATH  Manually specify paths to parse looking for
                         executables.
