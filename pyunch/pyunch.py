@@ -19,9 +19,10 @@ from platform import system as platform
 class App(object):
     def __init__(self, launcher, width=225, height=100,
                  yposition="center", xposition="center",
-                 yoffset=0, xoffset=0):
+                 yoffset=0, xoffset=0, colors={}):
         self.launcher = launcher
         root = Tk(className="pyunch")
+        root.tk_setPalette(**colors)
         root.title("pyunch")
         # Force the window to the front on macs
         if platform() == 'Darwin':
@@ -247,8 +248,56 @@ def main():
     parser.add_argument("--yoffset", type=int,
                         default=0,
                         help="The offset to apply to the y position")
+    parser.add_argument("--background", type=str,
+                        default=None)
+    parser.add_argument("--foreground", type=str,
+                        default=None)
+    parser.add_argument("--activeBackground", type=str,
+                        default=None)
+    parser.add_argument("--activeForeground", type=str,
+                        default=None)
+    parser.add_argument("--disabledForeground", type=str,
+                        default=None)
+    parser.add_argument("--highlightBackground", type=str,
+                        default=None)
+    parser.add_argument("--highlightColor", type=str,
+                        default=None)
+    parser.add_argument("--insertBackground", type=str,
+                        default=None)
+    parser.add_argument("--selectColor", type=str,
+                        default=None)
+    parser.add_argument("--selectBackground", type=str,
+                        default=None)
+    parser.add_argument("--selectForeground", type=str,
+                        default=None)
+    parser.add_argument("--troughColor", type=str,
+                        default=None)
 
     args = parser.parse_args()
+
+    colors = {
+        'background': args.background,
+        'foreground': args.foreground,
+        'activeBackground': args.activeBackground,
+        'activeForeground': args.activeForeground,
+        'disabledForeground': args.disabledForeground,
+        'highlightBackground': args.highlightBackground,
+        'highlightColor': args.highlightColor,
+        'insertBackground': args.insertBackground,
+        'selectColor': args.selectColor,
+        'selectBackground': args.selectBackground,
+        'selectForeground': args.selectForeground,
+        'troughColor': args.troughColor
+    }
+
+    to_pop = []
+    for x in colors:
+        if colors[x] is None:
+            to_pop.append(x)
+    for x in to_pop:
+        del colors[x]
+    if len(colors) > 0 and not colors.get('background'):
+        colors['background'] = "#000000"
 
     paths = []
     if not args.no_environmental:
@@ -260,7 +309,8 @@ def main():
     App(l,
         width=args.width, height=args.height,
         xposition=args.xposition, yposition=args.yposition,
-        xoffset=args.xoffset, yoffset=args.yoffset)
+        xoffset=args.xoffset, yoffset=args.yoffset,
+        colors=colors)
 
 
 if __name__ == "__main__":
