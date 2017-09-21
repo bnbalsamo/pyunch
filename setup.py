@@ -9,7 +9,7 @@ def readme():
 setup(
     name="pyunch",
     description="A process launcher",
-    version="0.0.1",
+    version="0.1.0",
     long_description=readme(),
     author="Brian Balsamo",
     author_email="brian@brianbalsamo.com",
