@@ -14,11 +14,12 @@ from argparse import ArgumentParser
 from os import system, makedirs
 from platform import system as platform
 from json import load, dump
+from shlex import split
 
 
 __author__ = "Brian Balsamo"
 __email__ = "brian@brianbalsamo.com"
-__version__ = "0.0.1"
+__version__ = "0.1.0"
 
 
 CONF_DIR = join(expandvars("$HOME"), '.config', 'pyunch')
@@ -108,7 +109,9 @@ class App:
         sel = self.lbox.curselection()
         if not sel:
             # The selection doesn't match anything in self.d
-            # Maybe just run it? For now, exit
+            # run it through shlex.split() and try to Popen that
+            if self.in_text.get():
+                Popen(split(self.in_text.get()))
             self.exit()
         k = self.lbox.get(sel)
         Popen(self.d[k])
