@@ -25,13 +25,19 @@ CONF_DIR = join(expandvars("$HOME"), '.config', 'pyunch')
 
 
 class App:
+    """
+    The pyunch GUI
+    """
     def __init__(self, d,
                  width=225, height=100,
                  yposition="center", xposition="center",
                  yoffset=0, xoffset=0,
                  colors={}):
 
+        # Set the internal dictionary
         self.d = d
+
+        # Build the window, populate the list
         root = Tk(className="pyunch")
         if colors:
             root.tk_setPalette(**colors)
@@ -56,15 +62,17 @@ class App:
         self.lbox.select_set(0)
         self.in_entry.focus()
 
+        self.in_entry.pack(fill=X, expand=True)
+        self.lbox.pack(fill=BOTH, expand=True)
+
+        # Set up the key actions
         root.bind('<Escape>', self.exit)
         root.bind('<Up>', self.sel_up)
         root.bind('<Down>', self.sel_down)
         root.bind('<Key>', self.box_update)
         self.in_entry.bind('<Return>', self.run)
 
-        self.in_entry.pack(fill=X, expand=True)
-        self.lbox.pack(fill=BOTH, expand=True)
-
+        # Figure out where to put the window on the screen
         ws = root.winfo_screenwidth()
         hs = root.winfo_screenheight()
 
@@ -87,9 +95,16 @@ class App:
 
         root.geometry('%dx%d+%d+%d' % (width, height, x, y))
 
+        # Go
         root.mainloop()
 
     def run(self, *args):
+        """
+        run the value associated with the currently selected key
+
+        TODO: Decide what should happen in the text in the Entry
+            doesn't correlate to a key
+        """
         sel = self.lbox.curselection()
         if not sel:
             # The selection doesn't match anything in self.d
@@ -100,6 +115,10 @@ class App:
         self.exit()
 
     def sel_up(self, *args):
+        """
+        Move the current selection in the lbox up one element
+        Unless we're at the top, then do nothing
+        """
         if self.lbox.curselection():
             cur_index = int(self.lbox.curselection()[0])
             if cur_index == 0:
@@ -111,6 +130,10 @@ class App:
         self.in_entry.focus()
 
     def sel_down(self, *args):
+        """
+        Move the current selection in the lbux down one element
+        Unless we're at the bottom, then do nothing
+        """
         if self.lbox.curselection():
             cur_index = int(self.lbox.curselection()[0])
             if cur_index == self.lbox.size() - 1:
@@ -122,6 +145,9 @@ class App:
         self.in_entry.focus()
 
     def box_update(self, *args):
+        """
+        Update the contents of the lbox, based on whats in the Entry
+        """
         if self.in_text.get() == "":
             o_list = [x for x in self.d]
         else:
@@ -145,12 +171,25 @@ class App:
         self.in_entry.focus()
 
     def exit(self, *args):
+        """
+        Exit the application, close the GUI
+        """
         exit()
 
 
 def index_paths():
+    """
+    CLI utility for generating the kind of index pyunch uses from directory paths
+    """
 
     def find_execs(path, recurse=False):
+        """
+        Traverse a path, grabbing anything executable
+
+        Returns a dictionary where the keys are file names, and the paths are
+        a single element list, where the element in the absolute path to the
+        executable
+        """
         d = {}
         for x in scandir(path):
             if x.is_file(follow_symlinks=True) and access(x.path, X_OK):
@@ -185,7 +224,7 @@ def index_paths():
     )
     parser.add_argument(
         "-f", "--out-file", help="The file name to save the index to",
-        type=str, default="0-path_index.json"
+        type=str, default="1-path_index.json"
     )
     parser.add_argument(
         "--update", help="Update a file which is already in place",
@@ -218,6 +257,9 @@ def index_paths():
 
 
 def main():
+    """
+    The pyunch CLI utility - calls the GUI with the given settings
+    """
     parser = ArgumentParser()
     parser.add_argument(
         "-i", "--index-dir",

@@ -4,7 +4,9 @@ v0.0.1
 
 [![Build Status](https://travis-ci.org/bnbalsamo/pyunch.svg?branch=master)](https://travis-ci.org/bnbalsamo/pyunch) [![Coverage Status](https://coveralls.io/repos/github/bnbalsamo/pyunch/badge.svg?branch=master)](https://coveralls.io/github/bnbalsamo/pyunch?branch=master)
 
-A process launcher
+pyunch is a minimal process launcher inspired by dmenu.
+
+Invoke it, start typing, hit enter when the entry you want to run is highlighted.
 
 # Quickstart
 
@@ -14,9 +16,9 @@ A process launcher
 
 # Explanation
 
-pyunch, by default, reads $HOME/.config/pyunch/indices, collected JSON documents in reverse sort order, and updates  dictionary with their contents. The JSON keys become the values displayed by pyunch, while the list values are then supplied to ```subprocess.Popen()```.
+pyunch, by default, reads $HOME/.config/pyunch/indices, collects JSON documents in reverse sort order, and updates  a dictionary with their contents. The dictionary keys become the values displayed by pyunch, while the list values are then supplied to ```subprocess.Popen()```.
 
-```pyunch-index``` is a command line utility for generating indices of executables from file system paths. By default it will scan all the paths in $PATH, gathering executables and generating an index that will be written to $HOME/.config/pyunch/indices/0-path_index.json.
+```pyunch-index``` is a command line utility for generating indices of executables from file system paths. By default it will scan all the paths in $PATH, gathering executables and generating an index that will be written to $HOME/.config/pyunch/indices/1-path_index.json.
 
 # Help
 
@@ -84,7 +86,6 @@ optional arguments:
                         The file name to save the index to
   --update              Update a file which is already in place
 ```
-
 
 # Author
 Brian Balsamo <brian@brianbalsamo.com>
