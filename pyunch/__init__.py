@@ -6,7 +6,7 @@ try:
 except ImportError:
     from scandir import scandir
 from os import access, X_OK, environ
-from os.path import expandvars, join
+from os.path import expandvars, join, isdir
 from tkinter import *
 from tkinter import ttk
 from subprocess import Popen
@@ -252,7 +252,8 @@ def index_paths():
 
     while paths:
         p = paths.pop()
-        d.update(find_execs(p), recurse=args.recurse)
+        if isdir(p):
+            d.update(find_execs(p), recurse=args.recurse)
 
     makedirs(args.out_dir, exist_ok=True)
     with open(target_path, 'w') as f:
@@ -349,8 +350,16 @@ def main():
         "--troughColor", type=str,
         default=None
     )
+    parser.add_argument(
+        "--version", action='store_true',
+        help="Print the version and exit"
+    )
 
     args = parser.parse_args()
+
+    if args.version:
+        print(__version__)
+        exit()
 
     colors = {
         'background': args.background,
