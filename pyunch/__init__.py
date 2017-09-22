@@ -19,7 +19,7 @@ from shlex import split
 
 __author__ = "Brian Balsamo"
 __email__ = "brian@brianbalsamo.com"
-__version__ = "0.1.0"
+__version__ = "0.2.0"
 
 
 CONF_DIR = join(expandvars("$HOME"), '.config', 'pyunch')
