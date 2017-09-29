@@ -1,6 +1,6 @@
 # pyunch
 
-v0.2.0
+v0.3.0
 
 [![Build Status](https://travis-ci.org/bnbalsamo/pyunch.svg?branch=master)](https://travis-ci.org/bnbalsamo/pyunch) [![Coverage Status](https://coveralls.io/repos/github/bnbalsamo/pyunch/badge.svg?branch=master)](https://coveralls.io/github/bnbalsamo/pyunch?branch=master)
 
