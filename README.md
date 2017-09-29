@@ -24,7 +24,7 @@ pyunch, by default, reads $HOME/.config/pyunch/indices, collects JSON documents 
 
 ```
 $ pyunch --help
-usage: __init__.py [-h] [-i INDEX_DIR] [-x WIDTH] [-y HEIGHT]
+usage: pyunch [-h] [-i INDEX_DIR] [-x WIDTH] [-y HEIGHT]
                    [--yposition YPOSITION] [--xposition XPOSITION]
                    [--xoffset XOFFSET] [--yoffset YOFFSET]
                    [--background BACKGROUND] [--foreground FOREGROUND]
