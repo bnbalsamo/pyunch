@@ -24,20 +24,21 @@ pyunch, by default, reads $HOME/.config/pyunch/indices, collects JSON documents 
 
 ```
 $ pyunch --help
-usage: pyunch [-h] [-i INDEX_DIR] [-x WIDTH] [-y HEIGHT]
-              [--yposition YPOSITION] [--xposition XPOSITION]
-              [--xoffset XOFFSET] [--yoffset YOFFSET]
-              [--background BACKGROUND] [--foreground FOREGROUND]
-              [--activeBackground ACTIVEBACKGROUND]
-              [--activeForeground ACTIVEFOREGROUND]
-              [--disabledForeground DISABLEDFOREGROUND]
-              [--highlightBackground HIGHLIGHTBACKGROUND]
-              [--highlightColor HIGHLIGHTCOLOR]
-              [--insertBackground INSERTBACKGROUND]
-              [--selectColor SELECTCOLOR]
-              [--selectBackground SELECTBACKGROUND]
-              [--selectForeground SELECTFOREGROUND]
-              [--troughColor TROUGHCOLOR]
+usage: __init__.py [-h] [-i INDEX_DIR] [-x WIDTH] [-y HEIGHT]
+                   [--yposition YPOSITION] [--xposition XPOSITION]
+                   [--xoffset XOFFSET] [--yoffset YOFFSET]
+                   [--background BACKGROUND] [--foreground FOREGROUND]
+                   [--activeBackground ACTIVEBACKGROUND]
+                   [--activeForeground ACTIVEFOREGROUND]
+                   [--disabledForeground DISABLEDFOREGROUND]
+                   [--highlightBackground HIGHLIGHTBACKGROUND]
+                   [--highlightColor HIGHLIGHTCOLOR]
+                   [--insertBackground INSERTBACKGROUND]
+                   [--selectColor SELECTCOLOR]
+                   [--selectBackground SELECTBACKGROUND]
+                   [--selectForeground SELECTFOREGROUND]
+                   [--troughColor TROUGHCOLOR] [--version] [-f FONT]
+                   [--font-size FONT_SIZE]
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -65,6 +66,9 @@ optional arguments:
   --selectBackground SELECTBACKGROUND
   --selectForeground SELECTFOREGROUND
   --troughColor TROUGHCOLOR
+  --version             Print the version and exit
+  -f FONT, --font FONT
+  --font-size FONT_SIZE
 ```
 
 ```
