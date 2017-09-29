@@ -197,11 +197,14 @@ def index_paths():
         """
         d = {}
         for x in scandir(path):
-            if x.is_file(follow_symlinks=True) and access(x.path, X_OK):
-                d[x.name] = x.path
-            if recurse is True:
-                if x.is_dir(follow_symlinks=True):
-                    d.update(find_execs(x.path))
+            try:
+                if x.is_file(follow_symlinks=True) and access(x.path, X_OK):
+                    d[x.name] = x.path
+                if recurse is True:
+                    if x.is_dir(follow_symlinks=True):
+                        d.update(find_execs(x.path))
+            except PermissionError:
+                pass
         return d
 
     parser = ArgumentParser()
