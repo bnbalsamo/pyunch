@@ -33,6 +33,7 @@ class App:
                  width=225, height=100,
                  yposition="center", xposition="center",
                  yoffset=0, xoffset=0,
+                 font=None, fontsize=12,
                  colors={}):
 
         # Set the internal dictionary
@@ -52,13 +53,14 @@ class App:
         root.wm_attributes("-topmost", 1)
         root.focus_force()
         self.in_text = StringVar()
-        self.in_entry = ttk.Entry(root, textvariable=self.in_text)
+        self.in_entry = ttk.Entry(root, textvariable=self.in_text, font=(font, fontsize))
         self.lbox = Listbox(
             root,
             listvariable=StringVar(value=sorted([k for k in self.d])),
             height=height,
             width=width,
-            selectmode="SINGLE"
+            selectmode="SINGLE",
+            font=(font, fontsize)
         )
         self.lbox.select_set(0)
         self.in_entry.focus()
@@ -354,6 +356,14 @@ def main():
         "--version", action='store_true',
         help="Print the version and exit"
     )
+    parser.add_argument(
+        "-f", "--font", type=str,
+        default=None
+    )
+    parser.add_argument(
+        "--font-size", type=int,
+        default=12
+    )
 
     args = parser.parse_args()
 
@@ -394,6 +404,7 @@ def main():
         width=args.width, height=args.height,
         xposition=args.xposition, yposition=args.yposition,
         xoffset=args.xoffset, yoffset=args.yoffset,
+        font=args.font, fontsize=args.font_size,
         colors=colors)
 
 
